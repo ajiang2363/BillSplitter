@@ -73,13 +73,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="309dp"
-        android:layout_height="512dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="51dp"
+        android:layout_width="267dp"
+        android:layout_height="412dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toStartOf="@+id/BillSplitter"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/BillSplittingLogo" />
+        app:srcCompat="@drawable/billsplittinglogo" />
 
 </android.support.constraint.ConstraintLayout>
