@@ -10,9 +10,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button signIn;
     private Button signUp;
+    private userServices userServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        userServices = new userServices();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
         signIn = (Button)findViewById(R.id.SignInButton);
@@ -40,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     public void signUpPageLoad(){
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
+    }
+
+    public userServices getUserServices(){
+        return userServices;
     }
 
 
