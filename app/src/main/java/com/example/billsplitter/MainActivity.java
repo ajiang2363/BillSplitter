@@ -1,51 +1,65 @@
 package com.example.billsplitter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button signIn;
-    private Button signUp;
-    private userServices userServices;
+    private Button takePhoto;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        userServices = new userServices();
+        //TODO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
-        signIn = (Button)findViewById(R.id.SignInButton);
-        signUp = (Button)findViewById(R.id.SignUpButton);
-
-        signIn.setOnClickListener(new View.OnClickListener() {
+        this.takePhoto = findViewById(R.id.takeImage);
+        takePhoto.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                signInPageLoad();
+            public void onClick(View v){
+                takePhoto();
             }
+
         });
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUpPageLoad();
-            }
-        });
+
     }
 
-    public void signInPageLoad(){
-        Intent intent = new Intent(this, SignIn.class);
+    public void takePhoto(){
+        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(takePicture.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePicture, 1);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int request, int result, Intent intent){
+        System.out.println("here");
+        if(request == 1 && result == RESULT_OK){
+            imageView = findViewById(R.id.imageView);
+            Bundle extra = intent.getExtras();
+            Bitmap image = (Bitmap) extra.get("data");
+            imageView.setImageBitmap(image);
+            imageView.setVisibility(View.VISIBLE);
+            loadNextPage(image);
+        }
+    }
+
+    public void loadNextPage(Bitmap image){
+        Intent intent = new Intent(this, imagePage.class);
+        intent.putExtra("IMAGE", image);
         startActivity(intent);
-    }
-
-    public void signUpPageLoad(){
-        Intent intent = new Intent(this, SignUp.class);
-        startActivity(intent);
-    }
-
-    public userServices getUserServices(){
-        return userServices;
     }
 
 
