@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
         this.takePhoto = findViewById(R.id.takeImage);
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int request, int result, Intent intent){
-        System.out.println("here");
         if(request == 1 && result == RESULT_OK){
             imageView = findViewById(R.id.imageView);
             Bundle extra = intent.getExtras();
