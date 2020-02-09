@@ -5,14 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.graphics.pdf.PdfDocument;
-import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
+
+import com.itextpdf.text.Image;
 
 import java.io.ByteArrayOutputStream;
 
@@ -45,7 +45,6 @@ public class imagePage extends AppCompatActivity {
         byte[] bytes = stream.toByteArray();
 
 
-
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300,600,1).create();
 
@@ -56,7 +55,8 @@ public class imagePage extends AppCompatActivity {
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         Matrix matrix = new Matrix();
-        matrix.setValues(new float[] { 1, .5f, 0, 0, 1, 0, 0, 0, 1 });
+        matrix.setScale((float) 1.6, (float) 1.6);
+
         canvas.drawBitmap(image, matrix, paint);
         document.finishPage(page);
 
